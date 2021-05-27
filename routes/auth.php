@@ -10,6 +10,11 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\MatchController;
+
+
 Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')
                 ->name('register');
@@ -62,3 +67,19 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+Route::get   ('team/list',      [TeamController::class, 'index'] )->middleware('auth')->name('team.list');    
+Route::get   ('team/show/{id}', [TeamController::class, 'show']  )->middleware('auth')->name('team.show');    
+Route::get   ('team/create',    [TeamController::class, 'create'])->middleware('auth')->name('team.create');  
+Route::get   ('team/edit/{id}', [TeamController::class, 'edit']  )->middleware('auth')->name('team.edit');    
+Route::put   ('team/store',     [TeamController::class, 'store'] )->middleware('auth')->name('team.store');   
+Route::delete('team/delete',    [TeamController::class, 'delete'])->middleware('auth')->name('team.delete');  
+
+Route::get   ('match/list',      [MatchController::class, 'index'] )->middleware('auth')->name('match.list');
+Route::get   ('match/show/{id}', [MatchController::class, 'show']  )->middleware('auth')->name('match.show');    
+Route::get   ('match/create',    [MatchController::class, 'create'])->middleware('auth')->name('match.create');  
+Route::get   ('match/edit/{id}', [MatchController::class, 'edit']  )->middleware('auth')->name('match.edit');    
+Route::put   ('match/store',     [MatchController::class, 'store'] )->middleware('auth')->name('match.store');   
+Route::delete('match/delete',    [MatchController::class, 'delete'])->middleware('auth')->name('match.delete');  
+
+Route::get   ('/perfil',       [PerfilController::class,          'index'])->middleware(['auth'])->name('perfil');
