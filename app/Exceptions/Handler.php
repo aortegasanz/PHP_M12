@@ -39,6 +39,7 @@ class Handler extends ExceptionHandler
             if($code == 404) {
                 return response()->view('errors.custom.404');
             }
-         });        
+         }); 
+         
     }
 }

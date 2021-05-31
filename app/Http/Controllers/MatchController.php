@@ -41,19 +41,24 @@ class MatchController extends Controller
     }
 
     public function store(Request $request) {
+        //dd($request);
         $this->validate($request, [
-            'name' => 'required:max:255',
-            'surname' => 'required:max:255',
+            "local_team" => 'required',
+            "visit_team" => 'required',
         ]);
-        if (Team::find($request->id)) {
-            $team = Team::findOrFail($request->id);
+        if (Score::find($request->id)) {
+            $match = Score::findOrFail($request->id);
         } else {
-            $team = new Team;
+            $match = new Score;
         }
-        $team->name = $request->name;
-        $team->surname = $request->surname;
-        $team->save();   
-        return redirect()->route('team.list')->with(['success' => 'Dades enmagatzemades correctament.']);
+        //dd($request);
+        $match->match_date = $request->match_date;
+        $match->local_team_id = $request->local_team;
+        $match->local_goal = $request->local_goal;
+        $match->visit_team_id = $request->visit_team;
+        $match->visit_goal = $request->local_goal;
+        $match->save();   
+        return redirect()->route('match.list')->with(['success' => 'Dades enmagatzemades correctament.']);
     }
    
 }
