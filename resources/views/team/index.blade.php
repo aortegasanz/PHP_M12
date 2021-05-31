@@ -31,12 +31,16 @@
                     <td>
                         <a href="{{ route('team.show', $team->id) }}"><i class="far fa-eye"></i></a>
                         <a href="{{ route('team.edit', $team->id) }}"><i class="fas fa-edit"></i></a> 
-                        <form action="{{ route('team.delete', $team->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <input type="hidden" name="id" value="{{ $team->id }}"/>
-                            <button type="submit" style="background:white;"><i class="far fa-trash-alt"></i></button>
-                        </form>
+                        @can('delete_team')
+                            <form action="{{ route('team.delete', $team->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $team->id }}"/>
+                                <button type="submit" style="background:white;"><i class="far fa-trash-alt"></i></button>
+                            </form>
+                        @else
+                            <span>No tiene permisos para borrar equipos</span>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

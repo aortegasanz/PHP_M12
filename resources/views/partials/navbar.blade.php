@@ -17,7 +17,11 @@
                     <button class="btn btn-danger" style="color:white;" type="submit">Desconecta't</button>
                 </form>  
                 <div>
-                    <span class="nav-item nav-link">Usuari: {{ Auth::user()->name }} | Rol: </span>
+                    <span class="nav-item nav-link">Usuari: {{ Auth::user()->name }} | Rols: 
+                    @foreach (Auth::user()->getRoleNames() as $role) 
+                        {{ $role }} 
+                    @endforeach
+                    </span>
                 </div>                    
             </div>                    
             @endauth            

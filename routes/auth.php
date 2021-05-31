@@ -73,7 +73,6 @@ Route::get   ('team/show/{id}', [TeamController::class, 'show']  )->middleware('
 Route::get   ('team/create',    [TeamController::class, 'create'])->middleware('auth')->name('team.create');  
 Route::get   ('team/edit/{id}', [TeamController::class, 'edit']  )->middleware('auth')->name('team.edit');    
 Route::put   ('team/store',     [TeamController::class, 'store'] )->middleware('auth')->name('team.store');   
-Route::delete('team/delete',    [TeamController::class, 'delete'])->middleware('auth')->name('team.delete');  
 
 Route::get   ('match/list',      [MatchController::class, 'index'] )->middleware('auth')->name('match.list');
 Route::get   ('match/show/{id}', [MatchController::class, 'show']  )->middleware('auth')->name('match.show');    
@@ -83,3 +82,7 @@ Route::put   ('match/store',     [MatchController::class, 'store'] )->middleware
 Route::delete('match/delete',    [MatchController::class, 'delete'])->middleware('auth')->name('match.delete');  
 
 Route::get   ('/perfil',       [PerfilController::class,          'index'])->middleware(['auth'])->name('perfil');
+
+Route::group(['middleware' => ['permission:delete_team']], function () {
+    Route::delete('team/delete',  [TeamController::class, 'delete'])->middleware('auth')->name('team.delete');  
+});

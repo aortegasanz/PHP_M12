@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\Match;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
