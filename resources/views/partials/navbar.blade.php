@@ -9,6 +9,18 @@
                 <a class="nav-item nav-link" href="{{ route('team.list') }}">Equips</a>
                 <a class="nav-item nav-link" href="{{ route('match.list') }}">Partits</a>
             </div>
+            @auth                    
+            <div class="navbar-nav">
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-danger" style="color:white;" type="submit">Desconecta't</button>
+                </form>  
+                <div>
+                    <span class="nav-item nav-link">Usuari: {{ Auth::user()->name }} | Rol: </span>
+                </div>                    
+            </div>                    
+            @endauth            
         </div>
     </nav>
 </div>

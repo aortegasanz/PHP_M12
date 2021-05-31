@@ -29,7 +29,16 @@
                 <div class="hidden fixed top-0 left-0 px-6 py-4 sm:block">
                     <p class="text-sm text-gray-700" style="font-size:3em;">Práctica PHP M12</p>
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700">Dashboard</a>
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>                        
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary" style="font-size:2em;">Entra</a>
                         @if (Route::has('register'))
